@@ -21,7 +21,7 @@ void SIC::getRPY(float &roll, float &pitch, float &yaw){
 
 
 void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
-  get("rpy-rate");
+  get("gyro-cal");
 
   roll_rate = valA;
   pitch_rate = valB;
