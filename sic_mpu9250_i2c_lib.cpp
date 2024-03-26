@@ -1,5 +1,5 @@
 
-#include "sic_i2c_lib.h"
+#include "sic_mpu9250_i2c_lib.h"
 
 
 SIC::SIC (int slave_addr){

@@ -1,5 +1,5 @@
-#ifndef SIC_I2C_LIB_H
-#define SIC_I2C_LIB_H
+#ifndef SIC_MPU9250_I2C_LIB_H
+#define SIC_MPU9250_I2C_LIB_H
 
 #if ARDUINO >= 100
   #include <Arduino.h>

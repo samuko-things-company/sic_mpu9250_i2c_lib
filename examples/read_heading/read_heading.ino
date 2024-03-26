@@ -12,7 +12,7 @@
  */
 
 // Samuko Imu Compute (SIC) i2c communication library
-#include <sic_i2c_lib.h>
+#include <sic_mpu9250_i2c_lib.h>
 
 
 uint8_t imuAddress = 0x68;
