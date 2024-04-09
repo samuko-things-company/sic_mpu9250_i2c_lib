@@ -2,8 +2,8 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-samuko_mpu9250_i2c_comm KEYWORD1
-SamukoMPU9250I2cCommApi KEYWORD1
+sic_mpu9250_i2c_lib KEYWORD1
+SIC KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -11,5 +11,4 @@ SamukoMPU9250I2cCommApi KEYWORD1
 
 getRPY  KEYWORD2
 getRPYrate  KEYWORD2
-getQuaternion KEYWORD2
-getHeading KEYWORD2
+getAcc KEYWORD2

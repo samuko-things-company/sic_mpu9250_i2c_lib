@@ -7,7 +7,9 @@ A simple way to get started is simply to try out and follow the example code
 
 
 ## How to Use the Library
-- Ensure you have the **`sic_mpu9250_driver module`** interfaced with the **`MPU9250`** module. setup and cilibrate it using the **`sic_mpu9250_setup_py_codes`**.
+- Ensure you have the **`sic_mpu9250_driver module`** interfaced with the **`MPU9250`** module. setup and calibrate it using the **`sic_mpu9250_setup_py_codes`**.
+
+- after successful setup, ensure it is the `madgwick filter code` (i.e **MODE 2**) that is uploaded and running on the driver module. You should see the green LED turned on.
 
 - Download download the library by clicking on the green Code button above (or clone it)
 
@@ -33,4 +35,4 @@ A simple way to get started is simply to try out and follow the example code
   > getRPYrate(&roll_rate, &pitch_rate, &yaw_rate)
 
 - get linear acceleration values ax, ay, az
-  > getLinAcc(&ax, &ay, &az)
+  > getAcc(&ax, &ay, &az)

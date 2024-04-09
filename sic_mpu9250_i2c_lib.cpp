@@ -33,7 +33,7 @@ void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
 }
 
 
-void SIC::getLinAcc(float &ax, float &ay, float &az){
+void SIC::getAcc(float &ax, float &ay, float &az){
   get("acc-cal");
 
   ax = valA;
