@@ -18,7 +18,6 @@ public:
   void getRPY(float&, float&, float&);
   void getRPYrate(float&, float&, float&);
   void getLinAcc(float&, float&, float&);
-  void getHeading(float&);
 
   
 private:

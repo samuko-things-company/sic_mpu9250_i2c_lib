@@ -8,7 +8,7 @@ SIC::SIC (int slave_addr){
 
 
 void SIC::getRPY(float &roll, float &pitch, float &yaw){
-  get("rpy-est");
+  get("rpy");
 
   roll = valA;
   pitch = valB;
@@ -44,22 +44,6 @@ void SIC::getLinAcc(float &ax, float &ay, float &az){
   valB = 0.0;
   valC = 0.0;
 }
-
-
-void SIC::getHeading(float &heading){
-  get("heading");
-
-  heading = valA;
-
-  valA = 0.0;
-  valB = 0.0;
-  valC = 0.0;
-}
-
-
-
-
-
 
 
 

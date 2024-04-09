@@ -26,11 +26,8 @@ A simple way to get started is simply to try out and follow the example code
 - connect to sic_driver shield module
   > SIC("port_name or port_path")
 
-- get filtered Roll, Pitch and incremental Yaw values
+- get filtered Roll, Pitch and Yaw values
   > getRPY(&roll, &pitch, &yaw)
-
-- get filtered absolute Yaw orientation readings
-  > getHeading(&yaw_abs)
 
 - get Roll, Pitch and Yaw rates value
   > getRPYrate(&roll_rate, &pitch_rate, &yaw_rate)
