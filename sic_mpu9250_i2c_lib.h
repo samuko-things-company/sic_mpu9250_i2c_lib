@@ -18,7 +18,6 @@ public:
   void getRPY(float&, float&, float&);
   void getRPYrate(float&, float&, float&);
   void getAcc(float&, float&, float&);
-  void getQuat(float&, float&, float&, float&);
   void getRPYvariance(float&, float&, float&);
   void getRPYrateVariance(float&, float&, float&);
   void getAccVariance(float&, float&, float&);
@@ -26,8 +25,8 @@ public:
   
 private:
   int slaveAddr;
-  String dataMsg = "", dataMsgBuffer = "", dataBuffer[4];
-  float valA, valB, valC, valD;
+  String dataMsg = "", dataMsgBuffer = "", dataBuffer[3];
+  float valA, valB, valC;
 
   void get(String);
 

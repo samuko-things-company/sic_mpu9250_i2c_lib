@@ -6,22 +6,6 @@ SIC::SIC (int slave_addr){
   slaveAddr = slave_addr;
 }
 
-
-void SIC::getQuat(float &qw, float &qx, float &qy, float &qz){
-  get("quat");
-
-  qw = valA;
-  qx = valB;
-  qy = valC;
-  qz = valD;
-
-  valA = 0.0;
-  valB = 0.0;
-  valC = 0.0;
-  valD = 0.0;
-}
-
-
 void SIC::getRPY(float &roll, float &pitch, float &yaw){
   get("rpy");
 
@@ -32,7 +16,6 @@ void SIC::getRPY(float &roll, float &pitch, float &yaw){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 
@@ -46,7 +29,6 @@ void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 
@@ -60,7 +42,6 @@ void SIC::getAcc(float &ax, float &ay, float &az){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 void SIC::getRPYvariance(float &r, float &p, float &y){
@@ -73,7 +54,6 @@ void SIC::getRPYvariance(float &r, float &p, float &y){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 void SIC::getRPYrateVariance(float &r, float &p, float &y){
@@ -86,7 +66,6 @@ void SIC::getRPYrateVariance(float &r, float &p, float &y){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 void SIC::getAccVariance(float &ax, float &ay, float &az){
@@ -99,7 +78,6 @@ void SIC::getAccVariance(float &ax, float &ay, float &az){
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
-  valD = 0.0;
 }
 
 
@@ -127,14 +105,12 @@ void SIC::get(String cmd_route){
   valA = dataBuffer[0].toFloat();
   valB = dataBuffer[1].toFloat();
   valC = dataBuffer[2].toFloat();
-  valD = dataBuffer[3].toFloat();
 
   dataMsg = "";
   dataMsgBuffer = "";
   dataBuffer[0] = "";
   dataBuffer[1] = "";
   dataBuffer[2] = "";
-  dataBuffer[3] = "";
 }
 
 

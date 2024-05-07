@@ -28,11 +28,20 @@ A simple way to get started is simply to try out and follow the example code
 - connect to sic_driver shield module
   > SIC("port_name or port_path")
 
-- get filtered Roll, Pitch and Yaw values
+- get filtered Roll, Pitch and Yaw values in 6dp
   > getRPY(&roll, &pitch, &yaw)
 
-- get Roll, Pitch and Yaw rates value
+- get Roll, Pitch and Yaw rates value in 6dp
   > getRPYrate(&roll_rate, &pitch_rate, &yaw_rate)
 
-- get linear acceleration values ax, ay, az
+- get linear acceleration values ax, ay, az in 6dp
   > getAcc(&ax, &ay, &az)
+
+- get rpy variances in 6dp
+  > getRPYvariance(&r_var, &p_var, &y_var)
+
+- get rpy rate variances in 6dp
+  > getRPYrateVariance(&r_var, &p_var, &y_var)
+
+- get acceleration variances in 6dp
+  > getAccVariance(&ax_var, &ay_, &az_var)
