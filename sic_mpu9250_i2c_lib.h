@@ -26,7 +26,7 @@ public:
   
 private:
   int slaveAddr;
-  String dataMsg = "", dataMsgBuffer = "", dataBuffer[3];
+  String dataMsg = "", dataMsgBuffer = "", dataBuffer[4];
   float valA, valB, valC, valD;
 
   void get(String);
