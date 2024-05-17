@@ -1,12 +1,10 @@
 
 /*
- * Basic example code on how to control via I2C your geared DC motor with quadrature 
- * encoder which is already connected to the smc_driver shield module and have already
- * succesfully set up their velocity PID control using the smc_app GUI 
+ * Basic example code shows how to read orientation data from the sic_mpu9250 driver shield module
+ * which have been succesfully calibrated with filter and covariances setup 
  * 
- * The code basically sends a low target velocity (in rad/s), waits for some time and then
- * sends a high target velocity (in rad/s). it also prints out the motors' angular positions
- * (in rad) and angular velocities (in rad/s).
+ * The code basically reads roll, pitch, and yaw values from the sic_mpu9250 connected to it.
+ * read printed values from serial monitor or serial plotter.
  * 
  * you can copy the code and use it in your project as you will.
  */
@@ -16,7 +14,7 @@
 
 
 uint8_t imuAddress = 0x68;
-SIC imu(0x68);
+SIC imu(0x68); // please update with the address you set when doing calibration and filter setup with the sic_mpu9250_setup_application
 
 ///////// my sepcial delay function ///////////////
 void delayMs(int ms) {
@@ -61,13 +59,17 @@ void loop()
 
     imu.getRPY(roll, pitch, yaw);
 
-    Serial.print(roll*toDeg,1);
+    Serial.print(roll);
     Serial.print(", ");
-    Serial.print(pitch*toDeg,1);
+    Serial.print(pitch);
     Serial.print(", ");
-    Serial.println(yaw*toDeg,1);
+    Serial.println(yaw);
 
-    Serial.println();
+    // Serial.print(roll*toDeg,1);
+    // Serial.print(", ");
+    // Serial.print(pitch*toDeg,1);
+    // Serial.print(", ");
+    // Serial.println(yaw*toDeg,1);
     
     prevSampleTime = millis();
   }
