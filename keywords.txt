@@ -12,3 +12,6 @@ SIC KEYWORD1
 getRPY  KEYWORD2
 getRPYrate  KEYWORD2
 getAcc KEYWORD2
+getRPYvariance  KEYWORD2
+getRPYrateVariance  KEYWORD2
+getAccVariance  KEYWORD2
