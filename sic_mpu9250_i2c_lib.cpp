@@ -7,7 +7,7 @@ SIC::SIC (int slave_addr){
 }
 
 void SIC::getRPY(float &roll, float &pitch, float &yaw){
-  get("rpy");
+  get("/rpy");
 
   roll = valA;
   pitch = valB;
@@ -20,7 +20,7 @@ void SIC::getRPY(float &roll, float &pitch, float &yaw){
 
 
 void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
-  get("gyro-cal");
+  get("/gyro-cal");
 
   roll_rate = valA;
   pitch_rate = valB;
@@ -33,7 +33,7 @@ void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
 
 
 void SIC::getAcc(float &ax, float &ay, float &az){
-  get("acc-cal");
+  get("/acc-cal");
 
   ax = valA;
   ay = valB;
@@ -45,7 +45,7 @@ void SIC::getAcc(float &ax, float &ay, float &az){
 }
 
 void SIC::getRPYvariance(float &r, float &p, float &y){
-  get("rpy-var");
+  get("/rpy-var");
 
   r = valA;
   p = valB;
@@ -57,7 +57,7 @@ void SIC::getRPYvariance(float &r, float &p, float &y){
 }
 
 void SIC::getRPYrateVariance(float &r, float &p, float &y){
-  get("gyro-var");
+  get("/gyro-var");
 
   r = valA;
   p = valB;
@@ -69,7 +69,7 @@ void SIC::getRPYrateVariance(float &r, float &p, float &y){
 }
 
 void SIC::getAccVariance(float &ax, float &ay, float &az){
-  get("acc-var");
+  get("/acc-var");
 
   ax = valA;
   ay = valB;
@@ -119,7 +119,7 @@ void SIC::masterSendData(String i2c_msg){
   i2c_msg.toCharArray(charArray, i2c_msg.length() + 1);
 
   Wire.beginTransmission(slaveAddr); 
-  Wire.write(charArray, i2c_msg.length());                
+  Wire.write(charArray);                
   Wire.endTransmission();
 }
 
