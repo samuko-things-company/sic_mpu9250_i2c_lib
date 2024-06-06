@@ -24,7 +24,7 @@ A simple way to get started is simply to try out and follow the example code
 
 ## Basic Library functions and usage
 
-- connect to sic_driver shield module by creating an object
+- connect to sic_mpu9250 module via i2c by creating an object
   > `SIC` imu(i2cAddress)
 
 - get filtered Roll, Pitch and Yaw values in 6dp
