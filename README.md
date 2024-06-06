@@ -25,25 +25,25 @@ A simple way to get started is simply to try out and follow the example code
 ## Basic Library functions and usage
 
 - connect to sic_driver shield module by creating an object
-  > `SIC` imu_object(i2cAddress)
+  > `SIC` imu(i2cAddress)
 
 - get filtered Roll, Pitch and Yaw values in 6dp
-  > imu_object.`getRPY`(&roll, &pitch, &yaw)
+  > imu.`getRPY`(&roll, &pitch, &yaw)
 
 - get filtered quaternion [qw, qx, qy, qz] values in 6dp
-  > imu_object.`getQuat`(&qw, &qx, &qy, &qz)
+  > imu.`getQuat`(&qw, &qx, &qy, &qz)
 
 - get Roll, Pitch and Yaw rates value in 6dp
-  > imu_object.`getRPYrate`(&roll_rate, &pitch_rate, &yaw_rate)
+  > imu.`getRPYrate`(&roll_rate, &pitch_rate, &yaw_rate)
 
 - get linear acceleration values ax, ay, az in 6dp
-  > imu_object.`getAcc`(&ax, &ay, &az)
+  > imu.`getAcc`(&ax, &ay, &az)
 
 - get rpy variances in 6dp
-  > imu_object.`getRPYvariance`(&r_var, &p_var, &y_var)
+  > imu.`getRPYvariance`(&r_var, &p_var, &y_var)
 
 - get rpy rate variances in 6dp
-  > imu_object.`getRPYrateVariance`(&r_var, &p_var, &y_var)
+  > imu.`getRPYrateVariance`(&r_var, &p_var, &y_var)
 
 - get acceleration variances in 6dp
-  > imu_object.`getAccVariance`(&ax_var, &ay_, &az_var)
+  > imu.`getAccVariance`(&ax_var, &ay_, &az_var)
