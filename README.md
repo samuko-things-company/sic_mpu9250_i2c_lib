@@ -10,7 +10,7 @@ A simple way to get started is simply to try out and follow the example code
 - Ensure you have the **`sic_mpu9250_driver module`**. Calibrate it and set it up using the **`sic_mpu9250_setup_application`**.
 
 - Download download the library by clicking on the green Code button above (or clone it)
-  > if you download it, extart it and change the folder name to `sic_mpu9250_i2c_lib`
+  > if you download it, extract it and change the folder name to `sic_mpu9250_i2c_lib`
 
 - Move the downloaded library file -`sic_mpu9250_i2c_lib` - to your Arduino library folder
   > e.g on linux: ... home/Arduino/libraries/
