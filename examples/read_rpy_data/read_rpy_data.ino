@@ -12,22 +12,15 @@
 // Samuko Imu Compute (SIC) i2c communication library
 #include <sic_mpu9250_i2c_lib.h>
 
-
-uint8_t imuAddress = 0x68;
-SIC imu(0x68); // please update with the address you set when doing calibration and filter setup with the sic_mpu9250_setup_application
-
-///////// my sepcial delay function ///////////////
-void delayMs(int ms) {
-  for (int i = 0; i < ms; i += 1) {
-    delayMicroseconds(1000);
-  }
-}
-//////////////////////////////////////////////////
+// please update with the address with that which you set when doing 
+// calibration and filter setup with the sic_mpu9250_setup_application
+uint8_t imuAddress = 104; // i.e 0x68 in HEX
+SIC imu(imuAddress);
 
 float toRad = 2*PI/360;
 float toDeg = 1/toRad;
 
-float roll, pitch, yaw;
+float roll, pitch, yaw; // create variables to store orientations
 
 long prevSampleTime;
 long sampleTime = 20; // millisec
@@ -42,7 +35,7 @@ void setup()
 
   // wait for the imu module to fully setup
   for (int i=1; i<=10; i+=1){
-    delayMs(1000); 
+    delay(1000); 
     Serial.println(i);
   }
   
@@ -57,7 +50,7 @@ void loop()
   if ((millis() - prevSampleTime) >= sampleTime) {
     /* CODE SHOULD GO IN HERE*/
 
-    imu.getRPY(roll, pitch, yaw);
+    imu.getRPY(roll, pitch, yaw); // read roll, pitch, yaw in radians
 
     Serial.print(roll);
     Serial.print(", ");

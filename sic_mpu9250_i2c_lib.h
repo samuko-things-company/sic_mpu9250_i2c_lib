@@ -9,6 +9,7 @@
 
 
 #include <Wire.h>
+#include <math.h>
 
 
 class SIC {
@@ -18,6 +19,7 @@ public:
   void getRPY(float&, float&, float&);
   void getRPYrate(float&, float&, float&);
   void getAcc(float&, float&, float&);
+  void getQuat(float&, float&, float&, float&);
   void getRPYvariance(float&, float&, float&);
   void getRPYrateVariance(float&, float&, float&);
   void getAccVariance(float&, float&, float&);

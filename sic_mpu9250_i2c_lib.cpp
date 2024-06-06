@@ -18,6 +18,16 @@ void SIC::getRPY(float &roll, float &pitch, float &yaw){
   valC = 0.0;
 }
 
+void SIC::getQuat(float &qw, float &qx, float &qy, float &qz){
+  float r, p, y;
+  getRPY(r, p, y);
+
+  qw = cos(r/2) * cos(p/2) * cos(y/2) + sin(r/2) * sin(p/2) * sin(y/2);
+  qx = sin(r/2) * cos(p/2) * cos(y/2) - cos(r/2) * sin(p/2) * sin(y/2);
+  qy = cos(r/2) * sin(p/2) * cos(y/2) + sin(r/2) * cos(p/2) * sin(y/2);
+  qz = cos(r/2) * cos(p/2) * sin(y/2) - sin(r/2) * sin(p/2) * cos(y/2);
+}
+
 
 void SIC::getRPYrate(float &roll_rate, float &pitch_rate, float &yaw_rate){
   get("/gyro-cal");
