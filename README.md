@@ -34,16 +34,34 @@ A simple way to get started is simply to try out and follow the example code
   > imu.`getQuat`(&qw, &qx, &qy, &qz)
 
 - get Roll, Pitch and Yaw rates value in 6dp
-  > imu.`getRPYrate`(&roll_rate, &pitch_rate, &yaw_rate)
+  > imu.`getGyro`(&gx, &gy, &gz)
 
 - get linear acceleration values ax, ay, az in 6dp
   > imu.`getAcc`(&ax, &ay, &az)
 
-- get rpy variances in 6dp
-  > imu.`getRPYvariance`(&r_var, &p_var, &y_var)
+- get roll variance in 10dp
+  > imu.`getRollVariance`(&r_var)
 
-- get rpy rate variances in 6dp
-  > imu.`getRPYrateVariance`(&r_var, &p_var, &y_var)
+- get pitch variance in 10dp
+  > imu.`getPitchVariance`(&p_var)
 
-- get acceleration variances in 6dp
-  > imu.`getAccVariance`(&ax_var, &ay_, &az_var)
+- get yaw variance in 10dp
+  > imu.`getYawVariance`(&y_var)
+
+- get roll rate variances in 10dp
+  > imu.`getGxVariance`(&gx_var)
+
+- get pitch rate variances in 10dp
+  > imu.`getGyVariance`(&gy_var)
+
+- get yaw rate variances in 10dp
+  > imu.`getGzVariance`(&gz_var)
+
+- get accX variances in 10dp
+  > imu.`getAxVariance`(&ax_var)
+
+- get accY variances in 10dp
+  > imu.`getAyVariance`(&ay_var)
+
+- get accZ variances in 10dp
+  > imu.`getAzVariance`(&az_var)
