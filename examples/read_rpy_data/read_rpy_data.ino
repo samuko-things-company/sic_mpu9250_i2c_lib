@@ -1,22 +1,36 @@
-#include <Wire.h>
-#include "sic_mpu9250_i2c_lib.h"
+/*
+ * Basic example code shows how to read orientation data from the sic_mpu9250 driver shield module
+ * which have been succesfully calibrated with filter and covariances setup
+ *
+ * The code basically reads roll, pitch, and yaw values from the sic_mpu9250 connected to it.
+ * read printed values from serial monitor or serial plotter.
+ *
+ * you can copy the code and use it in your project as you will.
+ */
 
-// Define Slave I2C Address
-const byte IMU_ADDRESS = 104; // 0x68
-SIC imu(IMU_ADDRESS);
+// Samuko Imu Compute (SIC) i2c communication library
+#include <sic_mpu9250_i2c_lib.h>
+
+// please update with the address with that which you set when doing
+// calibration and filter setup with the sic_mpu9250_setup_application
+uint8_t imuAddress = 104; // i.e 0x68 in HEX
+SIC imu(imuAddress);
 
 float toRad = 2 * PI / 360;
 float toDeg = 1 / toRad;
 
+float roll, pitch, yaw, gain; // create variables to store orientations
+
+long prevSampleTime;
+long sampleTime = 100; // millisec
+
 void setup()
 {
-
-  // Initialize I2C communications as Master
+  // start i2c communication
   Wire.begin();
 
-  // Setup serial monitor
+  // setup serial communication to print result on serial minitor
   Serial.begin(115200);
-  Serial.println("I2C Master Demonstration");
 
   // wait for the imu module to fully setup
   for (int i = 1; i <= 10; i += 1)
@@ -25,43 +39,34 @@ void setup()
     Serial.println(i);
   }
 
-  // // Send filter gain value of 0.1
-  // imu.setFilterGain(1.0);
+  imu.setFilterGain(0.1);
+  imu.getFilterGain(gain);
+  Serial.println(gain, 3);
 
-  // read the filter gain
-  float madgwickFilterGain;
-  imu.getFilterGain(madgwickFilterGain);
-
-  Serial.print("Madgwick Filter Gain: ");
-  Serial.println(madgwickFilterGain, 3);
-
-  // read the roll pitch and yaw value.
-  float roll_var, pitch_var, yaw_var;
-  imu.getRollVariance(roll_var);
-  imu.getPitchVariance(pitch_var);
-  imu.getYawVariance(yaw_var);
-
-  String msg = "RPY_variance: [" + String(roll_var, 10) + "," + String(pitch_var, 10) + "," + String(yaw_var, 10) + "]";
-  Serial.println(msg);
-  Serial.println();
-
-  delay(3000);
+  prevSampleTime = millis();
 }
 
 void loop()
 {
 
-  delay(50);
-  // read the roll pitch and yaw value in (rad/s).
-  float roll, pitch, yaw;
-  imu.getRPY(roll, pitch, yaw);
+  if ((millis() - prevSampleTime) >= sampleTime)
+  {
+    /* CODE SHOULD GO IN HERE*/
 
-  String msg = "RPY (rad/s): [" + String(roll, 4) + "," + String(pitch, 4) + "," + String(yaw, 4) + "]";
-  Serial.println(msg);
+    imu.getRPY(roll, pitch, yaw); // read roll, pitch, yaw in radians
 
-  // Serial.print(roll * toDeg);
-  // Serial.print(", ");
-  // Serial.print(pitch * toDeg);
-  // Serial.print(", ");
-  // Serial.println(yaw * toDeg);
+    // Serial.print(roll, 4);
+    // Serial.print(", ");
+    // Serial.print(pitch, 4);
+    // Serial.print(", ");
+    // Serial.println(yaw, 4);
+
+    Serial.print(roll * toDeg, 1);
+    Serial.print(", ");
+    Serial.print(pitch * toDeg, 1);
+    Serial.print(", ");
+    Serial.println(yaw * toDeg, 1);
+
+    prevSampleTime = millis();
+  }
 }

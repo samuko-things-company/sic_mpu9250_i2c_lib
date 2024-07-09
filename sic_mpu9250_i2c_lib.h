@@ -15,7 +15,7 @@ class SIC
 public:
   SIC(int);
 
-  void setFilterGain(float);
+  bool setFilterGain(float);
   void getFilterGain(float &);
 
   void getRPY(float &, float &, float &);
@@ -35,14 +35,20 @@ public:
   void getGyVariance(float &);
   void getGzVariance(float &);
 
+private:
   int slaveAddr;
   String dataMsg = "", dataMsgBuffer = "", dataBuffer[3];
   float valA, valB, valC;
 
   void get(String);
-  void send(String, float);
+
+  bool send(String, float);
+
   void masterSendData(String);
-  String masterReceiveData(byte);
+
+  String masterReceiveData();
+
+  String masterReceiveCharData();
 };
 
 #endif

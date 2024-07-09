@@ -1,4 +1,3 @@
-
 #include "sic_mpu9250_i2c_lib.h"
 
 SIC::SIC(int slave_addr)
@@ -6,16 +5,16 @@ SIC::SIC(int slave_addr)
   slaveAddr = slave_addr;
 }
 
-void SIC::setFilterGain(float gain)
+bool SIC::setFilterGain(float filterGain = 0.1)
 {
-  send("/gain", gain);
+  return send("/gain", filterGain);
 }
 
-void SIC::getFilterGain(float &gain)
+void SIC::getFilterGain(float &filterGain)
 {
   get("/gain");
 
-  gain = valA;
+  filterGain = valA;
 
   valA = 0.0;
   valB = 0.0;
@@ -48,7 +47,7 @@ void SIC::getQuat(float &qw, float &qx, float &qy, float &qz)
 
 void SIC::getGyro(float &roll_rate, float &pitch_rate, float &yaw_rate)
 {
-  get("/gyr-cal");
+  get("/gyro-cal");
 
   roll_rate = valA;
   pitch_rate = valB;
@@ -72,136 +71,109 @@ void SIC::getAcc(float &ax, float &ay, float &az)
   valC = 0.0;
 }
 
-void SIC::getRollVariance(float &var)
+void SIC::getRollVariance(float &r)
 {
   get("/r-var");
 
-  var = valA;
+  r = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getPitchVariance(float &var)
+void SIC::getPitchVariance(float &p)
 {
   get("/p-var");
 
-  var = valA;
+  p = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getYawVariance(float &var)
+void SIC::getYawVariance(float &y)
 {
   get("/y-var");
 
-  var = valA;
+  y = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getAxVariance(float &var)
+void SIC::getAxVariance(float &ax)
 {
   get("/ax-var");
 
-  var = valA;
+  ax = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getAyVariance(float &var)
+void SIC::getAyVariance(float &ay)
 {
   get("/ay-var");
 
-  var = valA;
+  ay = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getAzVariance(float &var)
+void SIC::getAzVariance(float &az)
 {
   get("/az-var");
 
-  var = valA;
+  az = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getGxVariance(float &var)
+void SIC::getGxVariance(float &gx)
 {
   get("/gx-var");
 
-  var = valA;
+  gx = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getGyVariance(float &var)
+void SIC::getGyVariance(float &gy)
 {
   get("/gy-var");
 
-  var = valA;
+  gy = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::getGzVariance(float &var)
+void SIC::getGzVariance(float &gz)
 {
   get("/gz-var");
 
-  var = valA;
+  gz = valA;
 
   valA = 0.0;
   valB = 0.0;
   valC = 0.0;
 }
 
-void SIC::masterSendData(String i2c_msg)
+void SIC::get(String cmd_route)
 {
-  char charArray[i2c_msg.length() + 1];
-  i2c_msg.toCharArray(charArray, i2c_msg.length() + 1);
-
-  Wire.beginTransmission(slaveAddr);
-  Wire.write(charArray);
-  Wire.endTransmission();
-}
-
-String SIC::masterReceiveData(byte dataSize)
-{
-  String i2c_msg = "";
-  Wire.requestFrom((int)slaveAddr, (int)dataSize);
-  while (Wire.available())
-  {
-    char c = Wire.read();
-    i2c_msg += c;
-  }
-  int indexPos = i2c_msg.indexOf((char)255);
-  if (indexPos != -1)
-  {
-    return i2c_msg.substring(0, indexPos);
-  }
-  return i2c_msg;
-}
-
-void SIC::get(String address_route)
-{
-  masterSendData(address_route);
-  dataMsg = masterReceiveData(32);
+  masterSendData(cmd_route);
+  dataMsg = masterReceiveData();
 
   int indexPos = 0, i = 0;
   do
@@ -233,11 +205,60 @@ void SIC::get(String address_route)
   dataBuffer[2] = "";
 }
 
-void SIC::send(String address_route, float valA)
+bool SIC::send(String cmd_route, float valA)
 {
-  String msg_buffer = address_route;
+  String msg_buffer = cmd_route;
   msg_buffer += ",";
   msg_buffer += String(valA, 3);
 
   masterSendData(msg_buffer);
+  String data = masterReceiveCharData();
+  if (data == "1")
+    return true;
+  else
+    return false;
+}
+
+void SIC::masterSendData(String i2c_msg)
+{
+  char charArray[i2c_msg.length() + 1];
+  i2c_msg.toCharArray(charArray, i2c_msg.length() + 1);
+
+  Wire.beginTransmission(slaveAddr);
+  Wire.write(charArray);
+  Wire.endTransmission();
+}
+
+String SIC::masterReceiveData()
+{
+  String i2c_msg = "";
+  Wire.requestFrom(slaveAddr, 32);
+  while (Wire.available())
+  {
+    char c = Wire.read();
+    i2c_msg += c;
+  }
+  int indexPos = i2c_msg.indexOf((char)255);
+  if (indexPos != -1)
+  {
+    return i2c_msg.substring(0, indexPos);
+  }
+  return i2c_msg;
+}
+
+String SIC::masterReceiveCharData()
+{
+  String i2c_msg = "";
+  Wire.requestFrom(slaveAddr, 1);
+  while (Wire.available())
+  {
+    char c = Wire.read();
+    i2c_msg += c;
+  }
+  int indexPos = i2c_msg.indexOf((char)255);
+  if (indexPos != -1)
+  {
+    return i2c_msg.substring(0, indexPos);
+  }
+  return i2c_msg;
 }
